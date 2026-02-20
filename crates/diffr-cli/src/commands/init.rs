@@ -8,10 +8,24 @@ pub struct InitArgs {
     path: Option<PathBuf>,
 }
 
+/// Canonicalize a path, stripping the `\\?\` extended-path prefix on Windows.
+pub fn simplified_canonicalize(path: &std::path::Path) -> std::io::Result<PathBuf> {
+    let canon = std::fs::canonicalize(path)?;
+    #[cfg(windows)]
+    {
+        let s = canon.to_string_lossy();
+        if let Some(stripped) = s.strip_prefix(r"\\?\") {
+            return Ok(PathBuf::from(stripped));
+        }
+    }
+    Ok(canon)
+}
+
 pub fn run(args: InitArgs) -> anyhow::Result<()> {
     let raw_path = args.path.unwrap_or_else(|| PathBuf::from("."));
-    let path = std::fs::canonicalize(&raw_path)
-        .map_err(|_| anyhow::anyhow!("path does not exist: {}", raw_path.display()))?;
+    // Create the directory if it doesn't exist (like git init)
+    std::fs::create_dir_all(&raw_path)?;
+    let path = simplified_canonicalize(&raw_path)?;
 
     let diffr_dir = path.join(".diffr");
     let repo_toml = diffr_dir.join("repo.toml");

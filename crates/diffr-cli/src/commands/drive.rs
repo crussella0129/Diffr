@@ -103,7 +103,7 @@ pub fn run(action: DriveAction, json: bool) -> anyhow::Result<()> {
 
             // Validate and canonicalize sync root path if provided
             let sync_root = if let Some(ref p) = path {
-                let canon = std::fs::canonicalize(p)
+                let canon = crate::commands::init::simplified_canonicalize(p)
                     .map_err(|_| anyhow::anyhow!("path does not exist: {}", p.display()))?;
                 let repo_toml = canon.join(".diffr").join("repo.toml");
                 if !repo_toml.exists() {
