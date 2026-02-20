@@ -1,0 +1,20 @@
+[package]
+name = "diffr-scan"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+diffr-core = { path = "../diffr-core" }
+diffr-db = { path = "../diffr-db" }
+xxhash-rust = { workspace = true }
+sha2 = { workspace = true }
+walkdir = { workspace = true }
+indicatif = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+anyhow = { workspace = true }
+chrono = { workspace = true }
+rusqlite = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

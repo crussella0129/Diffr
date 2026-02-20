@@ -1,0 +1,19 @@
+[package]
+name = "diffr-archive"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+diffr-core = { path = "../diffr-core" }
+diffr-db = { path = "../diffr-db" }
+uuid = { workspace = true }
+chrono = { workspace = true }
+zstd = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+anyhow = { workspace = true }
+xxhash-rust = { workspace = true }
+rusqlite = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }

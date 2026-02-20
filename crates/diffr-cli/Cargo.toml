@@ -1,0 +1,27 @@
+[package]
+name = "diffr-cli"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "diffr"
+path = "src/main.rs"
+
+[dependencies]
+diffr-core = { path = "../diffr-core" }
+diffr-db = { path = "../diffr-db" }
+diffr-discovery = { path = "../diffr-discovery" }
+diffr-scan = { path = "../diffr-scan" }
+diffr-sync = { path = "../diffr-sync" }
+diffr-archive = { path = "../diffr-archive" }
+clap = { workspace = true }
+indicatif = { workspace = true }
+console = { workspace = true }
+serde = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+thiserror = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+anyhow = { workspace = true }
+toml = { workspace = true }
